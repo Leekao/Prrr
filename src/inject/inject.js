@@ -30,7 +30,7 @@ chrome.extension.sendMessage({}, function(response) {
             txtInput.value = ""
             txtInput.dispatchEvent(event_focus)
           }
-        }, 150)
+        }, 5)
       }
       txtElem.click(e => {
         if (!run_once_flag) {
