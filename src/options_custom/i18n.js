@@ -1,7 +1,7 @@
 // SAMPLE
 this.i18n = {
     "settings": {
-        "en": "Settings",
+        "en": "Repositories",
         "de": "Optionen"
     },
     "search": {
