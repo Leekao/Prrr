@@ -1,0 +1,55 @@
+.App {
+  padding: 15px;
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.repo {
+  margin: 5px;
+  padding: 5px;
+  width: 200px;
+  border: solid 0.5px black;
+  position: relative;
+}
+
+.repo .title {
+  cursor: pointer;
+}
+
+.delete {
+  display: none;
+  position: absolute;
+  right: 10px;
+  color: red;
+  font-weight: bold;
+  font-size: 12px;
+  top: 5px;
+}
+
+.repo.open .delete {
+  display: block;
+}
+
+
+.member_list {
+  display: none;
+}
+
+.repo.open .member_list{
+  display: block
+}
+
+.repo .title {
+  font-size: 16px;
+  font-weight: bold;
+}
+.h2 {
+  font-size: 14px;
+}
+.block_container {
+  width: 200px;
+}
+.block_container input{
+  margin: 5px;
+  display: block;
+}

@@ -1,0 +1,34 @@
+{
+  "short_name": "Prrr",
+  "name": "Prrr",
+  "version": "2.0.0",
+  "manifest_version": 3,
+  "description": "Pull Requests Reviewers Requestor",
+  "homepage_url": "http://extensionizr.com",
+  "icons": {
+       "16": "logo192.png",
+       "48": "logo192.png",
+       "128": "logo192.png"
+   },
+  "options_page": "index.html",
+  "action": {
+    "default_icon": "icons/icon19.png",
+    "default_title": "Repo Editor",
+    "default_popup": "index.html"
+  },
+  "permissions": [
+    "https://www.github.com/*",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*"
+      ],
+      "js": [
+        "jquery.min.js",
+        "inject.js"
+      ]
+    }
+  ]
+} 
