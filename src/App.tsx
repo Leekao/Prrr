@@ -129,7 +129,6 @@ const RepoList = ({reloadFlag, setReload}) => {
       }
     })
   }, [reloadFlag])
-  console.log({repoList})
   return <div className="repos">
     {Object.keys(repoList).map((repo) => {
       return <Repo delete_repo={delete_repo} key={repo} members={repoList[repo]} name={repo} />
