@@ -1,7 +1,7 @@
 # Prrr
 Pull Request Review Requestor, Or "Prrr"
 
-We're adding the same people all of the time (depencds on repo), why do it manually?
+We're adding the same people all of the time (depends on repo), why do it manually?
 
 How to use:
 1. Download
