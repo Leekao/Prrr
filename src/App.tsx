@@ -6,17 +6,22 @@ import './App.css';
 const AddRepoComponent = ({setReload}) => {
   const [repoName, setRepoName] = useState("")
   const new_repo = () => {
-    if (newMemberName.length === 0) return
     chrome.storage.sync.get("Prrr", ({Prrr}) => {
-      Prrr[newMemberName] = []
+      if (repoName.length === 0) return
+      Prrr[repoName] = []
       chrome.storage.sync.set({Prrr}, () => {
-        setNewMemberName("")
+        setRepoName("")
         setReload(true)
       })
     })
   }
   return <div>
-    <input value={repoName} type="text" placeholder="new repo" />
+    <input
+      value={repoName}
+      onBlur={new_repo}
+      onChange={e => setRepoName(e.target.value)}
+      type="text"
+      placeholder="new repo" />
   </div>
 }
 
@@ -101,15 +106,14 @@ const Repo = ({name, members, delete_repo}) => {
 }
 
 
-const RepoList = () => {
-  const [reloadFlag, setReload] = useState(false)
+const RepoList = ({reloadFlag, setReload}) => {
   const [repoList, setRepoList] = useState({})
   const delete_repo = (name) => {
-    if (Prrr[name].length > 0){
-      alert("not empty!")
-      return
-    } 
     chrome.storage.sync.get("Prrr", ({Prrr}) => {
+      if (Prrr[name].length > 0){
+        alert("not empty!")
+        return
+      } 
       delete Prrr[name]
       chrome.storage.sync.set({Prrr}, () => {
         setRepoList(Prrr)
@@ -119,13 +123,13 @@ const RepoList = () => {
   useEffect(() => {
     console.log('reload triggered')
     chrome.storage.sync.get("Prrr", ({Prrr}) => {
-      if (!Prrr) return chrome.storage.sync.set({"Prrr": {"Fundbox/backend": []}}, () => setReload(true))
+      if (!Prrr) return chrome.storage.sync.set({"Prrr": {}}, () => setRepoList({"Prrr":{}}))
       else {
         setRepoList(Prrr)
-        setReload(false)
       }
     })
   }, [reloadFlag])
+  console.log({repoList})
   return <div className="repos">
     {Object.keys(repoList).map((repo) => {
       return <Repo delete_repo={delete_repo} key={repo} members={repoList[repo]} name={repo} />
@@ -133,13 +137,17 @@ const RepoList = () => {
   </div>
 }
 
-function App() {
+const App = () => {
+  const [reloadFlag, setReload] = useState(false)
+  useEffect(() => {
+    if (reloadFlag) setReload(false)
+  }, [reloadFlag])
   return (
     <div className="App">
       <div className="h2">Edit your repos:</div>
-      <RepoList />
+      <RepoList reloadFlag={reloadFlag} setReload={setReload} />
       <div className="h2">Or add a new one:</div>
-      <AddRepoComponent />
+      <AddRepoComponent setReload={setReload} />
     </div>
   );
 }
