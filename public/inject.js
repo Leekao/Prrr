@@ -1,6 +1,6 @@
 chrome.runtime.sendMessage({}, function(response) {
-	var readyStateCheckInterval = setInterval(function() {
-	if (document.readyState === "complete") {
+  var readyStateCheckInterval = setInterval(function() {
+  if (document.readyState === "complete") {
 		clearInterval(readyStateCheckInterval);
     chrome.storage.sync.get("Prrr", function(items){
       if (!items.Prrr) return
@@ -23,7 +23,6 @@ chrome.runtime.sendMessage({}, function(response) {
           visible_labels = [...labels].filter(v => {
             return !v.hidden
           })
-          console.log(visible_labels, visible_labels.pop)
           visible_labels.pop().click()
           if (r.length) add_reviewers(r)
           else {
